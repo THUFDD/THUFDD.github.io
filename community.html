@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Community - Awesome_OL</title>
+<style>
+  body {
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 20px 40px;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  nav a {
+    text-decoration: none;
+    color: #222;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #5a189a;
+  }
+
+  /* 主内容区域样式 */
+  .main-container {
+    display: flex;
+    margin-top: 80px;
+    padding: 0 40px;
+  }
+
+  .sidebar {
+    width: 250px;
+    padding: 20px;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-right: 30px;
+    height: fit-content;
+  }
+
+  .sidebar h2 {
+    font-size: 1.2rem;
+    color: #5a189a;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+
+  .sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 0;
+  }
+
+  .sidebar a:hover {
+    color: #5a189a;
+  }
+
+  .main-content {
+    flex: 1;
+    max-width: 900px;
+    padding-bottom: 60px;
+  }
+
+  .main-content h1 {
+    font-size: 2.5rem;
+    color: #5a189a;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+  }
+
+  section {
+    margin-bottom: 40px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  section p {
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+  }
+
+  section ul {
+    padding-left: 20px;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  section li {
+    margin-bottom: 10px;
+  }
+
+  section a {
+    color: #5a189a;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  section a:hover {
+    color: #7b2cbf;
+    text-decoration: underline;
+  }
+
+  .contributor-declaration {
+    background: #f8f4ff;
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 4px solid #5a189a;
+  }
+
+  .contact-info {
+    background: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border: 1px solid #eee;
+  }
+
+  /* 新增的返回按钮样式 */
+  .home-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #5a189a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .home-button:hover {
+    background-color: #7b2cbf;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  }
+
+  .home-button:active {
+    transform: scale(0.95);
+  }
+
+  .home-icon {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .main-container {
+      flex-direction: column;
+      padding: 0 20px;
+    }
+    
+    .sidebar {
+      width: 100%;
+      position: static;
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+    
+    .main-content {
+      padding: 0;
+    }
+    
+    .main-content h1 {
+      font-size: 2rem;
+    }
+  }
+
+  /* 底部灰色部分样式 */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
+  
+  .link-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .link-column a {
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .link-column a:hover {
+    color: white;
+  }
+  
+  .footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .back-to-top {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="installation.html">Installation</a>
+  <a href="models.html">Models</a>
+  <a href="user guide.html">User Guide</a>
+  <a href="community.html">Community</a>
+  <a href="about.html">About</a>
+  <a href="index.html#news">News</a>
+</nav>
+
+<div class="main-container">
+    <aside class="sidebar">
+        <h2>In this page</h2>
+        <ul>
+            <li><a href="#user-questions">User questions</a></li>
+            <li><a href="#contributing">Contributing</a></li>
+        </ul>
+    </aside>
+    
+    <main class="main-content">
+        <h1>Join Our Community</h1>
+        
+        <section id="user-questions">
+            <h2>User Support & Questions</h2>
+            <p>We have available channel to help you learn, teach, and get answers to your questions about Awesome_OL:</p>
+            <ul>
+                <li><strong>GitHub:</strong> Visit our <a href="https://github.com/liuzy0708/Awesome_OL">project repository</a> for discussions and Q&A</li>
+            </ul>
+            <p>Our community is friendly and responsive - don't hesitate to ask even basic questions!</p>
+        </section>
+        
+        <section id="contributing">
+            <h2>✨ Become a Contributor</h2>
+            <div class="contributor-declaration">
+                <p>We warmly welcome contributions from developers, researchers, and enthusiasts of all skill levels. Whether you're interested in coding, documentation, testing, or community support, there's a place for you in our project.</p>
+                
+                <p>Here's how you can contribute:</p>
+                <ul>
+                    <li>Report bugs and suggest enhancements</li>
+                    <li>Improve documentation and tutorials</li>
+                    <li>Add new features or algorithms</li>
+                    <li>Help with testing and quality assurance</li>
+                    <li>Translate documentation to other languages</li>
+                </ul>
+                
+                <div class="contact-info">
+                    <h3>Get Started Today</h3>
+                    <p>Contact our core team lead to discuss how you can contribute:</p>
+                    <p><strong>Contact:</strong> Zeyi Liu</p>
+                    <p><strong>Email:</strong> <a href="mailto:liuzy21@mails.tsinghua.edu.cn">liuzy21@mails.tsinghua.edu.cn</a></p>
+                </div>
+                
+                <p>We value every contribution and look forward to collaborating with you to push the boundaries of online learning research and applications!</p>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- 新增的返回按钮 -->
+<div class="home-button" onclick="window.location.href='index.html'">
+  <div class="home-icon">⌂</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">
+    <!-- 这里应该是彩色无限循环logo，实际使用时替换为图片 -->
+    <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff3366, #ff9933, #33cc33, #3399ff, #cc33ff); border-radius: 50%;"></div>
+    <div class="logo-text">Awesome_OL</div>
+  </div>
+  
+  <div class="footer-links">
+    <div class="link-column">
+      <a href="installation.html">Installation</a>
+      <a href="models.html">Models</a>
+      <a href="user guide.html">User Guide</a>
+      <a href="community.html">Community</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div>© 2024 Awesome_OL. Developed by THUFDD Research Group.</div>
+  </div>
+</footer>
+
+</body>
+</html>

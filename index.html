@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome_OL - A General Toolkit for Online Learning</title>
+<style>
+  body {
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 20px 40px;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  nav a {
+    text-decoration: none;
+    color: #222;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #5a189a;
+  }
+  main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px 20px 40px;
+    text-align: center;
+  }
+  main img.logo {
+    max-width: 140px;
+    margin-bottom: 20px;
+  }
+  main h1 {
+    font-weight: 600;
+    font-size: 2.8rem;
+    margin-bottom: 16px;
+    color: #5a189a;
+  }
+  main p.subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 36px;
+    color: #333;
+  }
+  main a.btn {
+    background-color: #5a189a;
+    color: white;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 32px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 6px 10px rgb(90 24 154 / 0.3);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 40px;
+  }
+  main a.btn:hover {
+    background-color: #7b2cbf;
+    box-shadow: 0 8px 14px rgb(123 44 191 / 0.5);
+  }
+  .modules-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+  }
+  .module {
+    width: 300px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .module:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  }
+  .module h2 {
+    color: #5a189a;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  .module p {
+    color: #555;
+    line-height: 1.6;
+  }
+  .gif-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 8px;
+  }
+  .gif-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .university-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+ .university-section h2 {
+    color: #5a189a;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .university-logos {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .university-logos img {
+    transition: transform 0.3s;
+  }
+
+  .university-logos img:hover {
+    transform: scale(1.05);
+  }
+
+  /* 底部灰色部分样式 */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
+  
+  .link-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .link-column a {
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .link-column a:hover {
+    color: white;
+  }
+  
+  .footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .back-to-top {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  @media(max-width: 600px) {
+    main h1 {
+      font-size: 2rem;
+    }
+    main p.subtitle {
+      font-size: 1.1rem;
+    }
+    .module {
+      width: 100%;
+    }
+    .university-logos {
+      gap: 30px;
+    }
+    .university-logos img {
+      width: 150px;
+    }
+    .footer {
+      flex-direction: column;
+    }
+    
+    .footer-links {
+      margin-top: 30px;
+      gap: 30px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="installation.html">Installation</a>
+  <a href="models.html">Models</a>
+  <a href="user guide.html">User Guide</a>
+  <a href="community.html">Community</a>
+  <a href="about.html">About</a>
+  <a href="#news">News</a>
+</nav>
+
+<main>
+  <img src="https://raw.githubusercontent.com/liuzy0708/liuzy0708.github.io/main/assets/img/SL.png" alt="Awesome_OL Logo" class="logo" />
+  <h1>Awesome_OL</h1>
+  <p class="subtitle">A General Toolkit for Online Learning Approaches</p>
+  <a href="https://github.com/liuzy0708/Awesome_OL" target="_blank" class="btn">GitHub Repository</a>
+  
+  <div class="modules-container">
+    <div class="module">
+      <h2>ONLINE ACTIVE LEARNING</h2>
+      <p>Comprehensive toolkit featuring state-of-the-art OAL strategies like CogDQS, DSA-AI and MTSGQS, designed for dynamic data streams with human-like cognition.</p>
+    </div>
+    
+    <div class="module">
+      <h2>DRIFT ADAPTATION</h2>
+      <p>Advanced classifiers including ROALE-DI and OLI2DS specifically designed to handle concept drift in imbalanced and evolving data streams.</p>
+    </div>
+    
+    <div class="module">
+      <h2>SEMI-SUPERVISED LEARNING</h2>
+      <p>Specialized OSSL classifiers like OSSBLS and ISSBLS that effectively utilize unlabeled data in streaming environments.</p>
+    </div>
+    
+    <div class="module">
+      <h2>ENSEMBLE METHODS</h2>
+      <p>Powerful ensemble techniques including ARF and DES that combine multiple learners for robust performance in dynamic conditions.</p>
+    </div>
+    
+    <div class="module">
+      <h2>VISUALIZATION TOOLS</h2>
+      <p>Interactive visualization capabilities including dynamic GIFs and confusion matrices for intuitive performance comparison.</p>
+    </div>
+    
+    <div class="module">
+      <h2>RESEARCH-ORIENTED</h2>
+      <p>Developed by THUFDD Research Group at Tsinghua University, with implementations of cutting-edge algorithms published in top-tier journals.</p>
+    </div>
+  </div>
+
+  <div class="gif-container">
+    <h2>Visualization: Comparison of Results from Multiple Models</h2>
+    <img src="https://github.com/Alpha0629/Alpha0629.github.io/raw/main/assets/Results_combined_Waveform_all_models.gif" 
+         alt="Waveform Results Comparison GIF"
+         onerror="this.onerror=null; this.src='https://placehold.co/800x400/5a189a/white?text=GIF+Not+Found';">
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-logo">
+    <!-- 这里应该是彩色无限循环logo，实际使用时替换为图片 -->
+    <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff3366, #ff9933, #33cc33, #3399ff, #cc33ff); border-radius: 50%;"></div>
+    <div class="logo-text">Awesome_OL</div>
+  </div>
+  
+  <div class="footer-links">
+    <div class="link-column">
+      <a href="installation.html">Installation</a>
+      <a href="models.html">Models</a>
+      <a href="user guide.html">User Guide</a>
+      <a href="community.html">Community</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div>© 2024 Awesome_OL. Developed by THUFDD Research Group.</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Download & Setup - Awesome_OL</title>
+<style>
+  body {
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 20px 40px;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  nav a {
+    text-decoration: none;
+    color: #222;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #5a189a;
+  }
+
+  /* 主内容区域样式 */
+  .main-container {
+    margin-top: 80px;
+    padding: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .download-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .download-header h1 {
+    font-size: 2.5rem;
+    color: #5a189a;
+    margin-bottom: 15px;
+  }
+
+  .download-header p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .setup-section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+  }
+
+  .setup-section h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+  }
+
+  .setup-section h2 .emoji {
+    margin-right: 10px;
+  }
+
+  .setup-section ol {
+    padding-left: 25px;
+  }
+
+  .setup-section li {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 1.05rem;
+  }
+
+  .setup-section strong {
+    color: #333;
+  }
+
+  .code-block {
+    background: #f5f5f5;
+    border-radius: 6px;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 15px 0;
+    overflow-x: auto;
+  }
+
+  .note-box {
+    background: #f8f4ff;
+    border-left: 4px solid #5a189a;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .note-box strong {
+    color: #5a189a;
+  }
+
+  /* 新增的返回按钮样式 */
+  .home-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #5a189a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .home-button:hover {
+    background-color: #7b2cbf;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  }
+
+  .home-button:active {
+    transform: scale(0.95);
+  }
+
+  .home-icon {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .main-container {
+      padding: 20px;
+      margin-top: 70px;
+    }
+    
+    .download-header h1 {
+      font-size: 2rem;
+    }
+    
+    .setup-section {
+      padding: 20px;
+    }
+    
+    .setup-section h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* 修改后的Logo显示样式 */
+  .main-logo {
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  .main-logo img {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 100px 20px 60px;
+    }
+    
+    .about-header h1 {
+      font-size: 2rem;
+    }
+    
+    .member-card {
+      width: 100%;
+    }
+  }
+
+  /* 底部灰色部分样式 */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
+  
+  .link-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .link-column a {
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .link-column a:hover {
+    color: white;
+  }
+  
+  .footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .back-to-top {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Installation</a>
+  <a href="models.html">Models</a>
+  <a href="user guide.html">User Guide</a>
+  <a href="community.html">Community</a>
+  <a href="about.html">About</a>
+  <a href="index.html#news">News</a>
+</nav>
+
+<div class="main-container">
+  <div class="main-logo">
+    <img src="https://raw.githubusercontent.com/liuzy0708/liuzy0708.github.io/main/assets/img/SL.png" alt="Awesome_OL Main Logo" />
+  </div>
+
+  <div class="download-header">
+    <h1>Awesome_OL Setup Guide</h1>
+    <p>Follow this step-by-step guide to set up your development environment and start using Awesome_OL for your online learning projects.</p>
+  </div>
+
+  <section class="setup-section">
+    <h2><span class="emoji">🔧</span> Environment Setup</h2>
+    
+    <p>Follow these steps to complete the environment setup (using VSCode as an example):</p>
+    
+    <ol>
+      <li>
+        <strong>Open Anaconda Prompt or Terminal</strong><br>
+        Start by opening your command line interface.
+      </li>
+      
+      <li>
+        <strong>Navigate to the directory</strong> containing the <code>env.yml</code> file<br>
+        Use the <code>cd</code> command to change to the appropriate directory.
+      </li>
+      
+      <li>
+        <strong>Create the Conda environment</strong> by running:
+        <div class="code-block">
+          conda env create -f env.yml
+        </div>
+        This will install all required dependencies.
+      </li>
+      
+      <li>
+        <strong>Activate the Conda environment</strong><br>
+        Open the integrated terminal in VSCode (<code>Terminal</code> > <code>New Terminal</code>) and execute:
+        <div class="code-block">
+          conda activate OL
+        </div>
+      </li>
+      
+      <li>
+        <strong>Select Python Interpreter in VSCode</strong>
+        <ul>
+          <li>Press <code>Ctrl + Shift + P</code> (Windows/Linux) or <code>Cmd + Shift + P</code> (Mac) to open the Command Palette</li>
+          <li>Type and select <strong>Python: Select Interpreter</strong></li>
+          <li>Choose the interpreter corresponding to the activated Conda environment (<code>OL</code>)</li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Run your Python code</strong><br>
+        Open your Python files and run them as usual. The activated environment will provide all required packages and dependencies.
+      </li>
+    </ol>
+    
+    <div class="note-box">
+      <strong>Note:</strong> If you encounter any issues during setup, please check our <a href="community.html">Community</a> page for support options or consult the troubleshooting section in our documentation.
+    </div>
+  </section>
+  
+  <section class="setup-section">
+    <div class="note-box">
+      <strong>Pro Tip:</strong> We recommend creating a fresh Conda environment for each project to avoid dependency conflicts.
+    </div>
+  </section>
+</div>
+
+<!-- 新增的返回按钮 -->
+<div class="home-button" onclick="window.location.href='index.html'">
+  <div class="home-icon">⌂</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">
+    <!-- 这里应该是彩色无限循环logo，实际使用时替换为图片 -->
+    <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff3366, #ff9933, #33cc33, #3399ff, #cc33ff); border-radius: 50%;"></div>
+    <div class="logo-text">Awesome_OL</div>
+  </div>
+  
+  <div class="footer-links">
+    <div class="link-column">
+      <a href="installation.html">Installation</a>
+      <a href="models.html">Models</a>
+      <a href="user guide.html">User Guide</a>
+      <a href="community.html">Community</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div>© 2024 Awesome_OL. Developed by THUFDD Research Group.</div>
+  </div>
+</footer>
+
+</body>
+</html>

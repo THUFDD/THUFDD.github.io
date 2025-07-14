@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Models - Awesome_OL</title>
+<style>
+  body {
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 20px 40px;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  nav a {
+    text-decoration: none;
+    color: #222;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #5a189a;
+  }
+
+  /* 主内容区域样式 */
+  .main-container {
+    margin-top: 80px;
+    padding: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .models-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .models-header h1 {
+    font-size: 2.5rem;
+    color: #5a189a;
+    margin-bottom: 15px;
+  }
+
+  .models-header p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    color: #5a189a;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f8f4ff;
+    font-weight: 600;
+    color: #5a189a;
+  }
+
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  a {
+    color: #5a189a;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: #7b2cbf;
+    text-decoration: underline;
+  }
+
+  .note-box {
+    background: #f8f4ff;
+    border-left: 4px solid #5a189a;
+    padding: 15px 20px;
+    margin: 30px 0;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .note-box strong {
+    color: #5a189a;
+  }
+
+  .summary-section {
+    margin: 50px 0;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+
+  .summary-section h2 {
+    color: #5a189a;
+    margin-top: 0;
+  }
+
+  .feature-icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+  }
+
+  /* 新增的返回按钮样式 */
+  .home-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #5a189a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .home-button:hover {
+    background-color: #7b2cbf;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  }
+
+  .home-button:active {
+    transform: scale(0.95);
+  }
+
+  .home-icon {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .main-container {
+      padding: 20px;
+      margin-top: 70px;
+    }
+    
+    .models-header h1 {
+      font-size: 2rem;
+    }
+    
+    th, td {
+      padding: 8px 10px;
+      font-size: 0.85rem;
+    }
+  }
+
+  /* 底部灰色部分样式 */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
+  
+  .link-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .link-column a {
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .link-column a:hover {
+    color: white;
+  }
+  
+  .footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .back-to-top {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+ /* Left Sidebar TOC Styles */
+  .sidebar {
+    position: fixed;
+    left: -210px;
+    top: 80px;
+    width: 200px;
+    height: calc(100vh - 80px);
+    background-color: #f8f4ff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 900;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    border-right: 1px solid #e0d0f0;
+  }
+
+  .sidebar:hover {
+    left: 0;
+  }
+
+  .sidebar-content {
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.2s ease 0.1s;
+  }
+
+  .sidebar:hover .sidebar-content {
+    opacity: 1;
+  }
+
+  .sidebar::before {
+    content: '≡';
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    color: #5a189a;
+    font-size: 20px;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .toc-list li {
+    margin-bottom: 8px;
+  }
+
+  .toc-list a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .toc-list a:hover {
+    color: #5a189a;
+  }
+
+  @media (max-width: 1024px) {
+    .sidebar {
+      display: none;
+    }
+  }
+
+/* 修改后的Logo显示样式 */
+  .main-logo {
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  .main-logo img {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 100px 20px 60px;
+    }
+    
+    .about-header h1 {
+      font-size: 2rem;
+    }
+    
+    .member-card {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Sidebar HTML (remove the toggle button) -->
+<div class="sidebar">
+  <div class="sidebar-content">
+    <h3>Table of Contents</h3>
+    <ul class="toc-list">
+      <li><a href="#oal-strategies">OAL Strategies</a></li>
+      <li><a href="#oal-classifiers">OAL Classifiers</a></li>
+      <li><a href="#ossl-classifiers">OSSL Classifiers</a></li>
+      <li><a href="#supervised-classifiers">Supervised Classifiers</a></li>
+      <li><a href="#summary-features">Feature Summary</a></li>
+    </ul>
+  </div>
+</div>
+
+<nav>
+  <a href="installation.html">Installation</a>
+  <a href="models.html">Models</a>
+  <a href="user guide.html">User Guide</a>
+  <a href="community.html">Community</a>
+  <a href="about.html">About</a>
+  <a href="index.html#news">News</a>
+</nav>
+
+<div class="main-container">
+  <div class="main-logo">
+    <img src="https://raw.githubusercontent.com/liuzy0708/liuzy0708.github.io/main/assets/img/SL.png" alt="Awesome_OL Main Logo" />
+  </div>
+
+  <div class="models-header">
+    <h1>Awesome_OL Models</h1>
+    <p>A comprehensive collection of online learning strategies and classifiers for your machine learning projects</p>
+  </div>
+
+  <div class="note-box">
+    <strong>Note:</strong> This page provides an overview of all available models in Awesome_OL. For detailed usage instructions, please refer to the <a href="user guide.html">User Guide</a> section.
+  </div>
+
+  <div class="summary-section">
+    <h2>Key Insights and Overview</h2>
+    
+    <h3>Model Diversity</h3>
+    <p>Awesome_OL provides a comprehensive collection of models covering various aspects of online learning:</p>
+    <ul>
+      <li><strong>5 advanced OAL strategies</strong> with cognitive and submodular approaches</li>
+      <li><strong>8 supervised classifiers</strong> with specialized drift adaptation techniques</li>
+      <li><strong>2 semi-supervised classifiers</strong> for scenarios with limited labeled data</li>
+      <li><strong>7 baseline methods</strong> for performance comparison</li>
+    </ul>
+    
+    <h3>Feature Highlights</h3>
+    <p>The toolkit excels in several key areas:</p>
+    <ul>
+      <li><strong>Drift Adaptation:</strong> 12/17 methods include drift adaptation capabilities</li>
+      <li><strong>Multi-class Support:</strong> 10/17 methods support multi-class classification</li>
+      <li><strong>Ensemble Methods:</strong> 5 powerful ensemble approaches for improved stability</li>
+      <li><strong>Imbalanced Learning:</strong> Specialized methods like ROALE-DI and OLI2DS</li>
+    </ul>
+    
+    <h3>Performance Considerations</h3>
+    <p>When selecting a method, consider:</p>
+    <ul>
+      <li><strong>For concept drift:</strong> IWDA, ARF, and DES show strong performance</li>
+      <li><strong>For active learning:</strong> DSA-AI and CogDQS provide advanced query strategies</li>
+      <li><strong>For efficiency:</strong> QRBLS and BLS-W offer fast incremental updates</li>
+      <li><strong>For imbalanced data:</strong> ROALE-DI and OLI2DS include specialized handling</li>
+    </ul>
+  </div>
+
+  <h2 id="oal-strategies" class="section-title">🧠 OAL Strategies</h2>
+  <p>Explore a variety of online active learning strategies in the <code>OAL_strategies/</code> folder.</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Strategy</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Code</th>
+        <th>ear</th>
+        <th>Journal/Conference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CogDQS</strong></td>
+        <td>Dual-query strategy using human memory cognition</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/9492291" target="_blank">IEEE</a></td>
+        <td>—</td>
+        <td><strong>2023</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+      <tr>
+        <td><strong>DSA-AI</strong></td>
+        <td>Dynamic submodular learning for imbalanced drifting streams</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/10195233/" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/liuzy0708/DSLS-Demo" target="_blank">GitHub</a></td>
+        <td><strong>2024</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+      <tr>
+        <td><strong>MTSGQS</strong></td>
+        <td>Memory-triggered submodularity-guided strategy</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/10105849" target="_blank">IEEE</a></td>
+        <td>—</td>
+        <td><strong>2023</strong></td>
+        <td><em>TITS</em></td>
+      </tr>
+      <tr>
+        <td><strong>DMI-DD</strong></td>
+        <td>Explanation-based query strategy at chunk level</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/10375819" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/liuzy0708/DMI-LS-Demo" target="_blank">GitHub</a></td>
+        <td><strong>2024</strong></td>
+        <td><em>TCYB</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Baseline Strategies</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Strategy</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Code</th>
+        <th>Year</th>
+        <th>Journal/Conference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>RS</strong></td>
+        <td>Random Sampling</td>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>US_fix</strong></td>
+        <td>Uncertainty sampling with fixed threshold</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/6414645" target="_blank">IEEE</a></td>
+        <td>—</td>
+        <td><strong>2014</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+      <tr>
+        <td><strong>US_var</strong></td>
+        <td>Uncertainty sampling with variable threshold</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/6414645" target="_blank">IEEE</a></td>
+        <td>—</td>
+        <td><strong>2014</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="oal-classifiers" class="section-title">⚙️ OAL Classifiers</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Classifier</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Source</th>
+        <th>Year</th>
+        <th>Journal/Conference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ROALE-DI</strong></td>
+        <td>Reinforcement-based ensemble for drifting imbalanced data</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/9204849" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/saferhand/ROALE-DI" target="_blank">GitHub</a></td>
+        <td><strong>2022</strong></td>
+        <td><em>TKDE</em></td>
+      </tr>
+      <tr>
+        <td><strong>OALE</strong></td>
+        <td>Online ensemble with hybrid labeling</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/8401336" target="_blank">IEEE</a></td>
+        <td>—</td>
+        <td><strong>2019</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="ossl-classifiers" class="section-title">🔍 OSSL Classifiers</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Classifier</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Source</th>
+        <th>Year</th>
+        <th>Journal/Conference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>OSSBLS</strong></td>
+        <td>Semi-supervised BLS with static anchors</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/9314231" target="_blank">IEEE</a></td>
+        <td>—</td>
+        <td><strong>2021</strong></td>
+        <td><em>TII</em></td>
+      </tr>
+      <tr>
+        <td><strong>ISSBLS</strong></td>
+        <td>Semi-supervised BLS without historical dependency</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/9314231" target="_blank">IEEE</a></td>
+        <td>—</td>
+        <td><strong>2021</strong></td>
+        <td><em>TII</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Baseline Strategy</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Classifier</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Year</th>
+        <th>Journal/Conference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SOSELM</strong></td>
+        <td>Semi-supervised ELM</td>
+        <td><a href="https://www.sciencedirect.com/science/article/pii/S0925231215011212" target="_blank">ScienceDirect Paper</a></td>
+        <td><strong>2016</strong></td>
+        <td><em>Neurocomputing</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="supervised-classifiers" class="section-title">📊 Supervised Classifiers</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Classifier</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Source</th>
+        <th>Year</th>
+        <th>Journal/Conference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>OLI2DS</strong></td>
+        <td>Imbalanced data stream learner with dynamic costs</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/10058539" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/youdianlong/OLI2DS" target="_blank">GitHub</a></td>
+        <td><strong>2023</strong></td>
+        <td><em>TKDE</em></td>
+      </tr>
+      <tr>
+        <td><strong>IWDA</strong></td>
+        <td>Learner-agnostic drift adaptation using density estimation</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/10105220" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/SirPopiel/IWDA" target="_blank">GitHub</a></td>
+        <td><strong>2023</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+      <tr>
+        <td><strong>DES</strong></td>
+        <td>Drift-adaptive ensemble with SMOTE</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/9802893" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/Jesen-BT/DES-ICD" target="_blank">GitHub</a></td>
+        <td><strong>2024</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+      <tr>
+        <td><strong>ACDWM</strong></td>
+        <td>Adaptive chunk selection for stability and drift</td>
+        <td><a href="https://ieeexplore.ieee.org/document/8924892" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/jasonyanglu/ACDWM" target="_blank">GitHub</a></td>
+        <td><strong>2020</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+      <tr>
+        <td><strong>ARF</strong></td>
+        <td>Adaptive resampling ensemble with ADWIN</td>
+        <td><a href="https://link.springer.com/article/10.1007/s10994-017-5642-8" target="_blank">Springer</a></td>
+        <td><a href="https://github.com/scikit-multiflow/scikit-multiflow" target="_blank">GitHub</a></td>
+        <td><strong>2017</strong></td>
+        <td><em>Machine Learning</em></td>
+      </tr>
+      <tr>
+        <td><strong>SRP</strong></td>
+        <td>Random subspace + online bagging</td>
+        <td><a href="https://ieeexplore.ieee.org/document/8970784" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/scikit-multiflow/scikit-multiflow" target="_blank">GitHub</a></td>
+        <td><strong>2019</strong></td>
+        <td><em>ICDM</em></td>
+      </tr>
+      <tr>
+        <td><strong>BLS-W</strong></td>
+        <td>Online BLS with Sherman–Morrison–Woodbury update</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/10375819" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/liuzy0708/DMI-LS-Demo" target="_blank">GitHub</a></td>
+        <td><strong>2023</strong></td>
+        <td><em>TCYB</em></td>
+      </tr>
+      <tr>
+        <td><strong>QRBLS</strong></td>
+        <td>BLS with QR factorization</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/4012031" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/Lichen0102/QRBLS" target="_blank">GitHub</a></td>
+        <td><strong>2025</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Baseline Classifier</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Classifier</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Source</th>
+        <th>Year</th>
+        <th>Journal/Conference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>OSELM</strong></td>
+        <td>Sequential ELM without drift detection</td>
+        <td><a href="https://ieeexplore.ieee.org/abstract/document/4012031" target="_blank">IEEE</a></td>
+        <td><a href="https://github.com/leferrad/pyoselm" target="_blank">GitHub</a></td>
+        <td><strong>2006</strong></td>
+        <td><em>TNNLS</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="summary-features" class="section-title">🧩 Summary of Features</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>OAL Strategy</th>
+        <th>Classifier</th>
+        <th>Binary</th>
+        <th>Multi-class</th>
+        <th>Drift Adaptation</th>
+        <th>Ensemble</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ROALE-DI</strong></td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td><strong>CogDQS</strong></td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>DSA-AI</strong></td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>DMI-DD</strong></td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>MTSGQS</strong></td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>RS</strong></td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>US-fix</strong></td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>US-var</strong></td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>OLI2DS</strong></td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>IWDA</strong></td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td><strong>DES</strong></td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td><strong>ACDWM</strong></td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td><strong>SRP</strong></td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td><strong>ARF</strong></td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td><strong>QRBLS</strong></td>
+        <td>—</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 新增的返回按钮 -->
+<div class="home-button" onclick="window.location.href='index.html'">
+  <div class="home-icon">⌂</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">
+    <!-- 这里应该是彩色无限循环logo，实际使用时替换为图片 -->
+    <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff3366, #ff9933, #33cc33, #3399ff, #cc33ff); border-radius: 50%;"></div>
+    <div class="logo-text">Awesome_OL</div>
+  </div>
+  
+  <div class="footer-links">
+    <div class="link-column">
+      <a href="installation.html">Installation</a>
+      <a href="models.html">Models</a>
+      <a href="user guide.html">User Guide</a>
+      <a href="community.html">Community</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div>© 2024 Awesome_OL. Developed by THUFDD Research Group.</div>
+  </div>
+</footer>
+
+</body>
+</html>
+
