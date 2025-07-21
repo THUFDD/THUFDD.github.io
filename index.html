@@ -5,317 +5,1063 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Awesome_OL - A General Toolkit for Online Learning</title>
 <style>
-  body {
-    margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #fff;
-    color: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  :root {
+    --primary-color: #5a189a;
+    --primary-hover: #7b2cbf;
+    --secondary-color: #f8f9fa;
+    --text-color: #333;
+    --light-text: #777;
+    --white: #fff;
+    --dark-bg: #2d3748;
+    --footer-bg: #1a1a1a;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+    --section-padding: 6rem 2rem;
+    --max-width: 1400px;
   }
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    gap: 24px;
-    padding: 20px 40px;
-    font-weight: 500;
-    font-size: 15px;
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+    overflow-x: hidden;
+  }
+  
+  /* 修改后的导航栏样式 */
+  header {
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
     z-index: 1000;
   }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .logo-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #5a189a;
+    background: linear-gradient(90deg, #5a189a, #9d4edd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+  
   nav a {
     text-decoration: none;
-    color: #222;
-    transition: color 0.3s;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
   }
+  
   nav a:hover {
     color: #5a189a;
   }
-  main {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 120px 20px 40px;
-    text-align: center;
-  }
-  main img.logo {
-    max-width: 140px;
-    margin-bottom: 20px;
-  }
-  main h1 {
-    font-weight: 600;
-    font-size: 2.8rem;
-    margin-bottom: 16px;
-    color: #5a189a;
-  }
-  main p.subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 36px;
-    color: #333;
-  }
-  main a.btn {
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
     background-color: #5a189a;
-    color: white;
-    text-decoration: none;
-    padding: 14px 32px;
-    border-radius: 32px;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 6px 10px rgb(90 24 154 / 0.3);
-    transition: background-color 0.3s, box-shadow 0.3s;
-    margin-bottom: 40px;
-  }
-  main a.btn:hover {
-    background-color: #7b2cbf;
-    box-shadow: 0 8px 14px rgb(123 44 191 / 0.5);
-  }
-  .modules-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto 60px;
-  }
-  .module {
-    width: 300px;
-    background: #f9f9f9;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .module:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  }
-  .module h2 {
-    color: #5a189a;
-    margin-top: 0;
-    margin-bottom: 15px;
-  }
-  .module p {
-    color: #555;
-    line-height: 1.6;
-  }
-  .gif-container {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    background: #f5f5f5;
-    border-radius: 8px;
-  }
-  .gif-container img {
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
   }
   
-  .university-section {
+  nav a:hover::after {
     width: 100%;
-    max-width: 1000px;
-    margin: 40px auto;
+  }
+  
+  /* 新版Hero区域 */
+  .hero {
+    padding: 10rem 2rem 6rem;
     text-align: center;
-    padding: 20px 0;
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(123, 44, 191, 0.15) 0%, transparent 60%);
+    z-index: 0;
+    animation: pulse 15s infinite alternate;
   }
 
- .university-section h2 {
-    color: #5a189a;
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+  
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  
+  .hero p {
+    font-size: 1.25rem;
+    color: var(--light-text);
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(90, 24, 154, 0.3);
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    opacity: 0;
+    transition: var(--transition);
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(123, 44, 191, 0.4);
+  }
+  
+  .btn:hover::after {
+    opacity: 1;
+  }
+  
+  /* 新版内容区域 */
+  .content-section {
+    padding: var(--section-padding);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+    border-radius: 2px;
+  }
+  
+  .section-header p {
+    color: var(--light-text);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* 新版卡片网格布局 */
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .content-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .content-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--primary-color), var(--primary-hover));
+    transition: var(--transition);
+  }
+
+  .content-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+  }
+  
+  .content-card:hover::before {
+    height: 100%;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .card-body {
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-body p {
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .card-features {
+    margin: 1.5rem 0;
+    padding-left: 0;
+  }
+
+  .card-features li {
+    margin-bottom: 0.8rem;
+    color: var(--light-text);
+    position: relative;
+    list-style-type: none;
+    padding-left: 1.8rem;
+    line-height: 1.6;
+  }
+
+  .card-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.6em;
+    height: 0.6em;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .card-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: var(--transition);
+    font-size: 1.05rem;
+  }
+
+  .card-link:hover {
+    color: var(--primary-hover);
+  }
+
+  .card-link svg {
+    margin-left: 0.5rem;
+    transition: var(--transition);
+  }
+
+  .card-link:hover svg {
+    transform: translateX(5px);
+  }
+
+  /* 新版Demo区域 */
+  .demo-section {
+    padding: var(--section-padding);
+    background-color: var(--secondary-color);
+    position: relative;
+  }
+  
+  .demo-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(90, 24, 154, 0.03)" d="M0,0 L100,0 L100,100 L0,100 Z"></path></svg>');
+    background-size: cover;
+    z-index: 0;
+  }
+
+  .demo-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .demo-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .demo-image-container {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+  }
+
+  .demo-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: var(--transition);
+  }
+  
+  .demo-image-container:hover .demo-image {
+    transform: scale(1.02);
+  }
+
+  .demo-description {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .demo-description h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .demo-description p {
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  .demo-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .stat-item {
+    background: rgba(90, 24, 154, 0.05);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+  }
+  
+  .stat-value {
     font-size: 2rem;
-    margin-bottom: 30px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-label {
+    color: var(--light-text);
+    font-size: 0.9rem;
   }
 
+  /* 新版大学标志区域 */
+  .universities {
+    padding: var(--section-padding);
+    background-color: var(--white);
+    text-align: center;
+    position: relative;
+  }
+  
   .university-logos {
     display: flex;
     justify-content: center;
-    gap: 60px;
     flex-wrap: wrap;
+    gap: 4rem;
+    margin-top: 3rem;
   }
 
-  .university-logos img {
-    transition: transform 0.3s;
+  .university-logo {
+    height: 70px;
+    filter: grayscale(100%) contrast(0.5);
+    opacity: 0.8;
+    transition: var(--transition);
+    object-fit: contain;
   }
 
-  .university-logos img:hover {
-    transform: scale(1.05);
+  .university-logo:hover {
+    filter: grayscale(0) contrast(1);
+    opacity: 1;
+    transform: scale(1.1);
   }
-
-  /* 底部灰色部分样式 */
-  .footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 20px;
+  
+  /* 新版特色部分 */
+  .features-section {
+    padding: var(--section-padding);
+    background: linear-gradient(135deg, #f9f9ff 0%, #f0f2ff 100%);
+  }
+  
+  .features-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .feature-item {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: var(--transition);
+  }
+  
+  .feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-radius: 50%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+  }
+  
+  .feature-title {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .feature-description {
+    color: var(--light-text);
+    line-height: 1.7;
+  }
+
+  /* 新版Footer */
+  footer {
+    background-color: var(--footer-bg);
+    color: var(--white);
+    padding: 5rem 2rem 2rem;
+    position: relative;
+  }
+  
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 4rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
   
   .footer-logo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-right: 50px;
   }
   
-  .logo-text {
-    font-size: 20px;
-    margin-top: 10px;
+  .footer-logo-img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, #ff3366, #ff9933, #33cc33, #3399ff, #cc33ff);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
   }
   
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
+  .footer-logo-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #fff, #ddd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
-  .link-column {
-    display: flex;
-    flex-direction: column;
+  .footer-logo p {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.7;
   }
   
-  .link-column a {
-    color: #ccc;
+  .footer-links h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.8rem;
+    color: var(--white);
+    position: relative;
+    padding-bottom: 0.8rem;
+  }
+  
+  .footer-links h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+    border-radius: 3px;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+  }
+  
+  .footer-links li {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-links a {
+    color: #aaa;
     text-decoration: none;
-    margin-bottom: 10px;
-    font-size: 14px;
+    transition: var(--transition);
+    font-size: 0.95rem;
+    display: inline-block;
+    padding: 0.3rem 0;
   }
   
-  .link-column a:hover {
-    color: white;
+  .footer-links a:hover {
+    color: var(--white);
+    transform: translateX(5px);
   }
   
   .footer-bottom {
-    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2.5rem;
+    margin-top: 4rem;
+    text-align: center;
+    color: #777;
+    font-size: 0.9rem;
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .social-links {
     display: flex;
-    justify-content: space-between;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
     align-items: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #444;
-    font-size: 12px;
-    color: #aaa;
-  }
-  
-  .back-to-top {
-    background: none;
-    border: none;
+    justify-content: center;
     color: white;
-    cursor: pointer;
-    font-size: 16px;
+    transition: var(--transition);
   }
   
-  @media(max-width: 600px) {
-    main h1 {
-      font-size: 2rem;
-    }
-    main p.subtitle {
-      font-size: 1.1rem;
-    }
-    .module {
-      width: 100%;
-    }
-    .university-logos {
-      gap: 30px;
-    }
-    .university-logos img {
-      width: 150px;
-    }
-    .footer {
-      flex-direction: column;
+  .social-link:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
     
-    .footer-links {
-      margin-top: 30px;
-      gap: 30px;
+    .demo-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .demo-image-container {
+      order: -1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    :root {
+      --section-padding: 4rem 1.5rem;
+    }
+    
+    .header-container {
+      flex-direction: column;
+      padding: 1rem;
+    }
+    
+    nav ul {
+      margin-top: 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .hero {
+      padding: 8rem 1.5rem 4rem;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero p {
+      font-size: 1.1rem;
+    }
+    
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .university-logos {
+      gap: 2rem;
+    }
+    
+    .university-logo {
+      height: 50px;
+    }
+    
+    .footer-container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+    
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      font-size: 1.5rem;
+    }
+    
+    .card-title {
+      font-size: 1.3rem;
     }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="installation.html">Installation</a>
-  <a href="models.html">Models</a>
-  <a href="user guide.html">User Guide</a>
-  <a href="community.html">Community</a>
-  <a href="about.html">About</a>
-  <a href="#news">News</a>
-</nav>
+<header>
+  <div class="header-container">
+    <a href="#" class="logo-container">
+      <img src="https://raw.githubusercontent.com/liuzy0708/liuzy0708.github.io/main/assets/img/SL.png" alt="Awesome_OL Logo" class="logo-img" />
+      <span class="logo-text">Awesome_OL</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="installation.html">Installation</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="user guide.html">User Guide</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<main>
-  <img src="https://raw.githubusercontent.com/liuzy0708/liuzy0708.github.io/main/assets/img/SL.png" alt="Awesome_OL Logo" class="logo" />
-  <h1>Awesome_OL</h1>
-  <p class="subtitle">A General Toolkit for Online Learning Approaches</p>
-  <a href="https://github.com/liuzy0708/Awesome_OL" target="_blank" class="btn">GitHub Repository</a>
-  
-  <div class="modules-container">
-    <div class="module">
-      <h2>ONLINE ACTIVE LEARNING</h2>
-      <p>Comprehensive toolkit featuring state-of-the-art OAL strategies like CogDQS, DSA-AI and MTSGQS, designed for dynamic data streams with human-like cognition.</p>
-    </div>
-    
-    <div class="module">
-      <h2>DRIFT ADAPTATION</h2>
-      <p>Advanced classifiers including ROALE-DI and OLI2DS specifically designed to handle concept drift in imbalanced and evolving data streams.</p>
-    </div>
-    
-    <div class="module">
-      <h2>SEMI-SUPERVISED LEARNING</h2>
-      <p>Specialized OSSL classifiers like OSSBLS and ISSBLS that effectively utilize unlabeled data in streaming environments.</p>
-    </div>
-    
-    <div class="module">
-      <h2>ENSEMBLE METHODS</h2>
-      <p>Powerful ensemble techniques including ARF and DES that combine multiple learners for robust performance in dynamic conditions.</p>
-    </div>
-    
-    <div class="module">
-      <h2>VISUALIZATION TOOLS</h2>
-      <p>Interactive visualization capabilities including dynamic GIFs and confusion matrices for intuitive performance comparison.</p>
-    </div>
-    
-    <div class="module">
-      <h2>RESEARCH-ORIENTED</h2>
-      <p>Developed by THUFDD Research Group at Tsinghua University, with implementations of cutting-edge algorithms published in top-tier journals.</p>
+<section class="hero">
+  <div class="hero-content">
+    <h1>A General Toolkit for Online Learning Approaches</h1>
+    <p>Comprehensive collection of state-of-the-art algorithms for online learning, active learning, and concept drift adaptation. Designed for researchers and practitioners working with dynamic data streams.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://github.com/liuzy0708/Awesome_OL" target="_blank" class="btn">
+        View on GitHub
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      </a>
     </div>
   </div>
+</section>
 
-  <div class="gif-container">
-    <h2>Visualization: Comparison of Results from Multiple Models</h2>
-    <img src="https://github.com/Alpha0629/Alpha0629.github.io/raw/main/assets/Results_combined_Waveform_all_models.gif" 
-         alt="Waveform Results Comparison GIF"
-         onerror="this.onerror=null; this.src='https://placehold.co/800x400/5a189a/white?text=GIF+Not+Found';">
-  </div>
-</main>
-
-<footer class="footer">
-  <div class="footer-logo">
-    <!-- 这里应该是彩色无限循环logo，实际使用时替换为图片 -->
-    <div style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff3366, #ff9933, #33cc33, #3399ff, #cc33ff); border-radius: 50%;"></div>
-    <div class="logo-text">Awesome_OL</div>
+<section class="content-section">
+  <div class="section-header">
+    <h2>Key Features</h2>
+    <p>Explore the powerful capabilities of our online learning toolkit designed for dynamic data environments</p>
   </div>
   
-  <div class="footer-links">
-    <div class="link-column">
-      <a href="installation.html">Installation</a>
-      <a href="models.html">Models</a>
-      <a href="user guide.html">User Guide</a>
-      <a href="community.html">Community</a>
-      <a href="about.html">About</a>
+  <div class="content-grid">
+    <div class="content-card">
+      <div class="card-header">
+        <div class="card-icon">1</div>
+        <h3 class="card-title">Online Active Learning</h3>
+      </div>
+      <div class="card-body">
+        <p>Comprehensive toolkit featuring state-of-the-art OAL strategies designed for dynamic data streams.</p>
+        <ul class="card-features">
+          <li>CogDQS: Cognitive Dynamic Query Strategy</li>
+          <li>DSA-AI: Dynamic Sample Allocation with Active Inference</li>
+          <li>MTSGQS: Multi-Task Selective Global Query Strategy</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">
+        </a>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-header">
+        <div class="card-icon">2</div>
+        <h3 class="card-title">Drift Adaptation</h3>
+      </div>
+      <div class="card-body">
+        <p>Advanced classifiers specifically designed to handle concept drift in imbalanced and evolving data streams.</p>
+        <ul class="card-features">
+          <li>ROALE-DI: Robust Online Active Learning Ensemble for Drift and Imbalance</li>
+          <li>OLI2DS: Online Learning for Imbalanced and Drifting Streams</li>
+          <li>Adaptive windowing techniques</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">
+        </a>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-header">
+        <div class="card-icon">3</div>
+        <h3 class="card-title">Semi-Supervised Learning</h3>
+      </div>
+      <div class="card-body">
+        <p>Specialized OSSL classifiers that effectively utilize unlabeled data in streaming environments.</p>
+        <ul class="card-features">
+          <li>OSSBLS: Online Semi-Supervised Broad Learning System</li>
+          <li>ISSBLS: Incremental Semi-Supervised Broad Learning System</li>
+          <li>Self-training and co-training strategies</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">
+        </a>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-header">
+        <div class="card-icon">4</div>
+        <h3 class="card-title">Ensemble Methods</h3>
+      </div>
+      <div class="card-body">
+        <p>Powerful ensemble techniques that combine multiple learners for robust performance in dynamic conditions.</p>
+        <ul class="card-features">
+          <li>ARF: Adaptive Random Forest</li>
+          <li>DES: Dynamic Ensemble Selection</li>
+          <li>Online bagging and boosting</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">
+        </a>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-header">
+        <div class="card-icon">5</div>
+        <h3 class="card-title">Visualization Tools</h3>
+      </div>
+      <div class="card-body">
+        <p>Interactive visualization capabilities for intuitive performance comparison and analysis.</p>
+        <ul class="card-features">
+          <li>Dynamic GIFs of model performance</li>
+          <li>Interactive confusion matrices</li>
+          <li>Real-time performance metrics</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">
+        </a>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-header">
+        <div class="card-icon">6</div>
+        <h3 class="card-title">Research-Oriented</h3>
+      </div>
+      <div class="card-body">
+        <p>Developed by THUFDD Research Group with implementations of cutting-edge algorithms published in top-tier journals.</p>
+        <ul class="card-features">
+          <li>IEEE Transactions on Knowledge and Data Engineering</li>
+          <li>Pattern Recognition</li>
+          <li>Neural Networks</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="features-container">
+    <div class="section-header">
+      <h2>Why Choose Awesome_OL?</h2>
+      <p>Our toolkit stands out with these unique advantages for your online learning research and applications</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-item">
+        <h3 class="feature-title">Cutting-Edge</h3>
+        <p class="feature-description">Implements the latest algorithms from top-tier publications, keeping you at the forefront of online learning research.</p>
+      </div>
+      
+      <div class="feature-item">
+        <h3 class="feature-title">Comprehensive</h3>
+        <p class="feature-description">Covers all aspects of online learning from active learning to drift adaptation in one unified toolkit.</p>
+      </div>
+      
+      <div class="feature-item">
+        <h3 class="feature-title">User-Friendly</h3>
+        <p class="feature-description">Well-documented with intuitive APIs and examples to get you started quickly with minimal setup.</p>
+      </div>
+      
+      <div class="feature-item">
+        <h3 class="feature-title">Scalable</h3>
+        <p class="feature-description">Designed to handle large-scale data streams efficiently with optimized memory usage and processing.</p>
+      </div>
+      
+      <div class="feature-item">
+        <h3 class="feature-title">Extensible</h3>
+        <p class="feature-description">Modular architecture makes it easy to implement and test your own algorithms alongside ours.</p>
+      </div>
+      
+      <div class="feature-item">
+        <h3 class="feature-title">Community</h3>
+        <p class="feature-description">Active development and growing community of researchers and practitioners for support and collaboration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="demo-section" id="demo">
+  <div class="demo-container">
+    <div class="section-header">
+      <h2>Model Performance Visualization</h2>
+      <p>Compare results from multiple models in dynamic streaming environments with our interactive tools</p>
+    </div>
+    
+    <div class="demo-content">
+      <div class="demo-image-container">
+        <img src="https://github.com/Alpha0629/Alpha0629.github.io/raw/main/assets/Results_combined_Waveform_all_models.gif" 
+             alt="Waveform Results Comparison GIF"
+             class="demo-image"
+             onerror="this.onerror=null; this.src='https://placehold.co/800x400/5a189a/white?text=GIF+Not+Found';">
+      </div>
+      
+      <div class="demo-description">
+        <h3>Real-time Model Comparison</h3>
+        <p>Our visualization tools allow you to compare the performance of different models in real-time as they adapt to concept drift in data streams. The dynamic GIF demonstrates how various algorithms respond to changes in the underlying data distribution.</p>
+        <p>Key metrics such as accuracy, F1-score, MSE, and R²</Ri:a></Ri:a> are tracked and visualized to help researchers and practitioners understand model behavior under different conditions.</p>
+        
+        <div class="demo-stats">
+          <div class="stat-item">
+            <div class="stat-value">4+</div>
+            <div class="stat-label">Visualization Types</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">25+</div>
+            <div class="stat-label">Supported Algorithms</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8+</div>
+            <div class="stat-label">Benchmark Datasets</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Customizable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <div class="footer-logo-img">OL</div>
+      <div class="footer-logo-text">Awesome_OL</div>
+      <p>A comprehensive toolkit for online learning approaches, developed by the THUFDD Research Group at Tsinghua University.</p>
+      
+      <div class="social-links" style="justify-content: flex-start; margin-top: 2rem;">
+      </div>
+    </div>
+    
+    <div class="footer-links">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="installation.html">Installation Guide</a></li>
+        <li><a href="models.html">Model Catalog</a></li>
+        <li><a href="user guide.html">User Guide</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
     </div>
   </div>
   
   <div class="footer-bottom">
-    <div>© 2024 Awesome_OL. Developed by THUFDD Research Group.</div>
+    <div class="social-links">
+      <a href="https://github.com/liuzy0708/Awesome_OL" class="social-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      </a>
+    </div>
+    <p>© 2024 Awesome_OL. All rights reserved. Developed by THUFDD Research Group at Tsinghua University.</p>
   </div>
 </footer>
 
